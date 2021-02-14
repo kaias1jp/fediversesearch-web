@@ -1,0 +1,7 @@
+ja:
+  index_counts: "総インデックス数"
+  keyword: "キーワード"
+  search: "検索"
+  result_counts: "結果件数"
+  get_data: "データ取得中..."
+  locale: "日本語"
