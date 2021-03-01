@@ -15,3 +15,6 @@ ja:
   language: "言語"
   search_for_server: "分散SNSのサーバー、インスタンスを検索"
   registable: "登録可能"
+  all: "すべて"
+  select_software_annotation: "「すべて」以外はキーワードを省略できます"
+  server_type: "サーバー種別"

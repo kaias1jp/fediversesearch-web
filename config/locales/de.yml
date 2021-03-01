@@ -46,3 +46,6 @@ de:
   language: "Sprache"
   search_for_server: "Suchen Sie nach Server, Instanz in Fediverse"
   registable: "registrierbar"
+  all: "alle"
+  select_software_annotation: "Schlüsselwörter können mit Ausnahme von 'alle' weggelassen werden."
+  server_type: "Server Typ"

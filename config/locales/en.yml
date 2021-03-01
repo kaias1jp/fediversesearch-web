@@ -47,3 +47,6 @@ en:
   language: "language"
   search_for_server: "Search for server, instance in fediverse"
   registable: "registable"
+  all: "all"
+  select_software_annotation: "Keywords can be omitted except for 'all'"
+  server_type: "server type"

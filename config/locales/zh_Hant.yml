@@ -47,3 +47,6 @@ zh_Hant:
   language: "語言"
   search_for_server: "搜索服務器實例"
   registable: "可註冊的"
+  all: "全部"
+  select_software_annotation: "關鍵字可以省略，但'全部'除外"
+  server_type: "服務器類型"
