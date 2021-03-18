@@ -1,0 +1,172 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+  <script>
+    function setdata(index) {
+      $("#detaildata").empty();
+      $("#detaildata").append('<table width="100%">');
+      $("#detaildata").append('<tr><th>title</th></tr>');
+      $("#detaildata").append("<tr><td>"+htmlEntities(json_data[index].title)+"</td></tr>");
+      $("#detaildata").append('<tr><th>URL</th></tr>');
+      $("#detaildata").append("<tr><td><a href='https://" + htmlEntities(json_data[index].uri)+ "' target='_blank'>"+htmlEntities(json_data[index].uri)+"</a></td></tr>");
+      $("#detaildata").append("<tr><th>short_description</th></tr>");
+      $("#detaildata").append("<tr><td>"+htmlEntities(json_data[index].short_description)+"</td></tr>");
+      $("#detaildata").append("<tr><th>description</th></tr>");
+      $("#detaildata").append("<tr><td>"+htmlEntities(json_data[index].description)+"</td></tr>");
+      $("#detaildata").append("<tr><th>registrations</th></tr>");
+      $("#detaildata").append("<tr><td>"+htmlEntities(booleantostr(json_data[index].registrations))+"</td></tr>");
+      $("#detaildata").append('</table>');
+    }
+        function htmlEntities(str) {
+        if (str == null) {
+                return "";
+        } else {
+                str2 = String(str).replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'');
+    return String(str2).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+}
+function booleantostr(bool) {
+        if (bool == null) {
+                return "";
+        } else {
+          if (bool == true) {
+            return "<%= t :regist_true %>";
+          } else {
+            return "<%= t :regist_false %>";
+          }
+        }
+
+}
+var json_data;
+
+function search(){
+                        $("#resXmlHttpRequestObj").empty();
+  $("#resXmlHttpRequestObj").append("<%= t :get_data %>");
+        // 1.$.ajaxメソッドで通信を行います。
+        //  20行目のdataは、フォームの内容をserialize()している
+        //  →serialize()の内容は、cs1=custom1&cs2=custom2
+            var data = {
+        keyword: $("#keyword").val()
+    };
+      if ($("#registration").is(':checked')) {
+        data.registration = "true"
+      }
+        if ($("#software").val() != "") {
+        data.software = $("#software").val();
+      }
+  console.log(data);
+        $.ajax({        
+                url:"https://www.fediversesearch.com/search/", // 通信先のURL
+                type:"GET",             // 使用するHTTPメソッド
+                data: data,
+                contentType: 'application/json',
+                //data:$("#form1").serialize(), // 送信するデータ
+                dataType:"json", // 応答のデータの種類 
+                                                // (xml/html/script/json/jsonp/text)
+                timespan:1000           // 通信のタイムアウトの設定(ミリ秒)
+
+                // 2. doneは、通信に成功した時に実行される
+                //  引数のdata1は、通信で取得したデータ
+                //  引数のtextStatusは、通信結果のステータス
+                //  引数のjqXHRは、XMLHttpRequestオブジェクト
+                }).done(function(data1,textStatus,jqXHR) {
+                        console.log(data1);
+                                $("#span1").text(jqXHR.status); //例：200
+                                $("#span2").text(textStatus); //例：success
+
+                                // 3. キーを指定して値を表示 
+
+                                // 4. JavaScriptオブジェクトをJSONに変換
+                                var data2 = data1.data;
+                        $("#resXmlHttpRequestObj").empty();
+                        console.log(Object.keys(data2).length);
+                  $("#resXmlHttpRequestObj").append("<br/><%= t :result_counts %>:"+Object.keys(data2).length+"<br/>");
+//                $("#resXmlHttpRequestObj").append("<input id='tablesearchinput' />");
+json_data = data2;
+                        $("#resXmlHttpRequestObj").append('<table id="tabledata">'); 
+                  $("#resXmlHttpRequestObj").append('<thead><tr><th><%= t :registrations %></th><th><%= t :title %></th></tr></thead>');
+                        for(var i in data2){
+                                    html = "<tr>";
+                          html += "<td bgcolor='#dddddd'>"+booleantostr(data2[i].registrations)+"</td>";
+                          //                                    html += "<td bgcolor='#99CC00'><a href='https://" + htmlEntities(data2[i].uri)+ "' target='_blank'>"+htmlEntities(data2[i].uri)+"</a></td>";
+                          html += "<td bgcolor='#ffffff' style='word-wrap:break-word;'>"+htmlEntities(data2[i].title)+"<a href='#ex1' rel='modal:open' onclick='setdata("+i+")'>"+"("+htmlEntities(data2[i].uri)+")"+"</a></td>";
+//                                    html += "<td title='"+htmlEntities(data2[i].short_description)+"' bgcolor='#dddddd'>"+htmlEntities(data2[i].short_description).substr(0, 32)+"</td>";
+//                                    html += "<td title='"+htmlEntities(data2[i].description)+"' bgcolor='ffffff'>"+htmlEntities(data2[i].description).substr(0, 64)+"</td>";
+//                                    html += "<td bgcolor='#dddddd'>"+booleantostr(data2[i].registrations)+"</td>";
+                                    html += "</tr>";
+                                    $("#resXmlHttpRequestObj").append(html);
+    }
+                        $("#resXmlHttpRequestObj").append("</table>");
+        //              document.getElementById("resXmlHttpRequestObj").innerHTML=data2;
+
+                                // 5.JSONをJavaScriptオブジェクトにし、
+                                // キーを指定して値(httpbin.org)を表示
+
+                // 6. failは、通信に失敗した時に実行される
+                }).fail(function(jqXHR, textStatus, errorThrown ) {
+                                $("#span1").text(jqXHR.status); //例：404
+                                $("#span2").text(textStatus); //例：error
+                                $("#span3").text(errorThrown); //例：NOT FOUND
+
+                // 7. alwaysは、成功/失敗に関わらず実行される
+                }).always(function(){
+                                $("#span6").text("complete");
+                                
+        });
+        };
+        </script>
+          <div id="header">
+        <table style="border:none;"  width="100%" align="right">
+       <tbody style="border:none;" align="right">
+      <tr style="border:none;" align="right">
+        <td align="right" style="border:none;">
+        <form name="form2" action="">
+          <%= t :language %>:<select name="Select1" id="Select1" onchange="selectboxChange();">
+      <option value="default" selected>---</option>
+      <option value="en">English</option>
+      <option value="ja">日本語</option>
+      <option value="zh_Hant">繁體中文</option>
+      <option value="de">Deutsche</option>
+    </select>
+        </form>
+        </td>
+      </tr>
+      <tr>
+        <td>created by <a href="https://popon.pptdn.jp/@popn_ja" target="_blank">popn_ja</a></td>
+      </tr>
+       </tbody>
+    </table>
+  </div>
+<!--<p>jqXHR.statusを表示：<span id="span1"></span></p>
+<p>textStatusを表示：<span id="span2"></span></p>
+<p>errorThrownを表示：<span id="span3"></span></p>
+<p>表示1：<span id="span4"></span></p>
+<p>表示2：<span id="span5"></span></p>
+<p>表示3：<span id="span6"></span></p>
+-->
+<h2>fediverse search (mastodon, pleroma, pixelfed, misskey, etc...)</h2>
+*
+<%= t :search_for_server %><br/><br/>
+<%= t :index_counts %>:<span id="counts"></span><br/>
+<form id="form1" onsubmit="return false;">
+  <%= t :keyword %>:<input type="text" name="keyword" id="keyword" value="" ><input type="button" id="button1" value="<%= t :search %>" onclick="search()"><br/>
+  <%= t :registable %>:<input type="checkbox" name="registration" id="registration" value="regist"/><br/>
+  <%= t :server_type %>:<select name="software" id="software">
+    <option value="">-- <%= t :all %> --</option>
+    <option value="mastodon">Mastodon</option>
+    <option value="pleroma">Pleroma</option>
+    <option value="misskey">Misskey</option>
+    <option value="pixelfed">Pixelfed</option>
+    <option value="peertube">PeerTube</option>
+    <option value="friendica">Friendica</option>
+    <option value="writefreely">Writefreely</option>
+    <option value="hubzilla">Hubzilla</option>
+    <option value="plume">Plume</option>
+    <option value="other">Others</option>
+  </select> * <%= t :select_software_annotation %>
+</form>
+<div id="ex1" class="modal">
+  <div id="detaildata"></div>
+  <br/>
+  <a href="#" rel="modal:close">Close</a>
+</div>
+  <div id="resXmlHttpRequestObj"><table id="tabledata"></table></div>

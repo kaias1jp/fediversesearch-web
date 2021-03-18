@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fediversesearch</title>
+    <%= favicon_link_tag('/favicon.ico') %>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+       <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-searcher/0.3.0/jquery.searcher.min.js"></script>
+<%= javascript_pack_tag 'user/application' %>
+  <script>
+var params = (new URL(document.location)).searchParams;
+var locale = params.get('locale');
+if (locale == null) {
+  var language = (window.navigator.languages && window.navigator.languages[0]) ||
+            window.navigator.language ||
+            window.navigator.userLanguage ||
+            window.navigator.browserLanguage;
+      switch (language) {
+        case "en":
+          location.href="?locale=en";
+          break;
+        case "ja":
+          location.href="?locale=ja";
+          break;
+        case "zh_Hant":
+        case "zh-TW":
+          location.href="?locale=zh_Hant";
+          break;
+        case "de":
+          location.href="?locale=de";
+          break;
+      }
+}
+
+
+
+
+
+        function selectboxChange() {
+
+      selindex = document.form2.Select1.selectedIndex;
+      switch (selindex) {
+        case 1:
+          location.href="?locale=en";
+          break;
+        case 2:
+          location.href="?locale=ja";
+          break;
+        case 3:
+          location.href="?locale=zh_Hant";
+          break;
+        case 4:
+          location.href="?locale=de";
+          break;
+      }
+    }
+$( function() {
+function htmlEntities(str) {
+        if (str == null) {
+                return "";
+        } else {
+                str2 = String(str).replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'');
+    return String(str2).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+}
+function booleantostr(bool) {
+        if (bool == null) {
+                return "";
+        } else {
+          if (bool == true) {
+            return "<%= t :regist_true %>";
+          } else {
+            return "<%= t :regist_false %>";
+          }
+        }
+
+}
+});
+
+</script>
+        <script>
+                $(function() {
+                        const url = 'https://www.fediversesearch.com/counts/';
+fetch(url).then(function(response) {
+  return response.text();
+}).then(function(text) {
+        data = JSON.parse(text);
+        $("#counts").empty();
+        $("#counts").append(data.data);
+});
+});
+        </script>
+        <style>
+th {
+	color: #fff;
+	background: #41a2e6;
+}
+      td {
+        padding: 5px;
+      }
+        </style>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-51365686-2">
+</script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-51365686-2');
+</script>
+  </head>
+
+  <body bgcolor="#fff3dc">
+    <%= yield %>
+  </body>
+  <script>
+        var arg  = new Object;
+ url = location.search.substring(1).split('&');
+
+for(i=0; url[i]; i++) {
+    var k = url[i].split('=');
+    arg[k[0]] = k[1];
+}
+
+var locale = arg.locale;
+if (locale == null) { locale = "default";}
+document.form2.Select1.value = locale;
+  </script>
+</html>
