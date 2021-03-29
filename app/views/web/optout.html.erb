@@ -1,22 +1,27 @@
 <script>
   function startdnscheck() {
-    const url = '/dnscheck/?uri=';
+    const url = 'https://www.fediversesearch.com/dnscheck/?uri=';
     let uri = document.getElementById('uri').value;
 
 fetch(url+encodeURIComponent(uri)).then(function(response) {
   return response.text();
-}).then(function(text) {
-  console.log(text);
-});
-        let uriInput = document.getElementById('uri');
+}).then(function(result) {
+  console.log(result);
+  status = JSON.parse(result).status;
+  if (status === 'SUCCESS') {
+    let uriInput = document.getElementById('uri');
     uriInput.readOnly = true;
     let dnscheckInput = document.getElementById('dnscheck');
-dnscheckInput.disabled = true;
+    dnscheckInput.disabled = true;
     let optoutInput = document.getElementById('optout');
-optoutInput.disabled = false;
+    optoutInput.disabled = false;
+  } else {
+    alert('no set "nofediversesearch"');
+  }
+});
   }
 function startoptout() {
-    const url = '/optout/?uri=';
+    const url = 'https://www.fediversesearch.com/optout/?uri=';
     let uri = document.getElementById('uri').value;
 
 fetch(url+encodeURIComponent(uri)).then(function(response) {
@@ -30,7 +35,6 @@ fetch(url+encodeURIComponent(uri)).then(function(response) {
 finishInput.disabled = false;
 }
 function startfinish() {
-  alert("under construction");
   location.href = "/";
 }
 </script>
