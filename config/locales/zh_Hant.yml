@@ -50,3 +50,12 @@ zh_Hant:
   all: "全部"
   select_software_annotation: "關鍵字可以省略，但'全部'除外"
   server_type: "服務器類型"
+  optout_page: "退出頁面"
+  optout_information: "如果要從此搜索服務中排除服務器或實例，請執行以下操作："
+  optout_description_1: "在DNS的TXT字段中設置“nofediversesearch”。"
+  optout_description_2: "輸入服務器FQDN，然後單擊“檢查DNS”按鈕。 系統確認已設置TXT字段後，將啟用“退出”按鈕。"
+  optout_description_3: "當您按下“退出”按鈕時，將再次檢查DNS，如果沒有問題，系統將設置為從搜索中排除您的服務器。 請注意，如果執行此操作，它將不會出現在搜索結果中，但是將保留FQDN，以避免收集您的服務器信息。"
+  optout_description_4: "單擊“完成”按鈕以返回首頁。"
+  optout_annotation: "如果您使用的是託管服務，但沒有自己的域，請稍候，我們正在考慮另一種方法。"
+  optout_fqdn_caption: "您要選擇退出的FQDN："
+

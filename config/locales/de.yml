@@ -49,3 +49,12 @@ de:
   all: "alle"
   select_software_annotation: "Schlüsselwörter können mit Ausnahme von 'alle' weggelassen werden."
   server_type: "Server Typ"
+  optout_page: "Abmeldeseite"
+  optout_information: "Wenn Sie Ihren Server oder Ihre Instanz von diesem Suchdienst ausschließen möchten, gehen Sie wie folgt vor:"
+  optout_description_1: "Setzen Sie \"nofediversesearch\" in das TXT-Feld von DNS."
+  optout_description_2: "Geben Sie den Server-FQDN ein und klicken Sie auf die Schaltfläche \"DNS prüfen\". Sobald das System bestätigt, dass das TXT-Feld eingestellt ist, wird die Schaltfläche \"Optout\" aktiviert."
+  optout_description_3: "Wenn Sie auf die Schaltfläche \"Optout\" drücken, wird der DNS erneut geprüft und wenn es keine Probleme gibt, wird das System so eingestellt, dass Ihr Server von der Suche ausgeschlossen wird. Beachten Sie, dass er in diesem Fall nicht in den Suchergebnissen erscheint, aber der FQDN wird beibehalten, um die Erfassung Ihrer Serverinformationen zu vermeiden."
+  optout_description_4: "Klicken Sie auf die Schaltfläche \"Fertigstellen\", um zur obersten Seite zurückzukehren."
+  optout_annotation: "Wenn Sie Hosting nutzen und keine eigene Domain haben, warten Sie bitte, da wir eine andere Methode in Betracht ziehen."
+  optout_fqdn_caption: "FQDN, den Sie abwählen möchten:"
+

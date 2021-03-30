@@ -50,3 +50,12 @@ en:
   all: "all"
   select_software_annotation: "Keywords can be omitted except for 'all'"
   server_type: "server type"
+  optout_page: "Optout page"
+  optout_information: "If you want to exclude your server or instance from this search service, do the following:"
+  optout_description_1: "Set \"nofediversesearch\" in the TXT field of DNS."
+  optout_description_2: "Enter the server FQDN and click the \"Check DNS\" button. Once the system confirms that the TXT field is set, the Opt out button will be enabled."
+  optout_description_3: "When you press the \"Optout\" button, the DNS will be checked again and if there are no problems, the system will be set to exclude your server from search. Note that if you do this, it will not appear in the search results, but the FQDN will be retained to avoid collecting your server information."
+  optout_description_4: "Click the \"Finish\" button to return to the top page."
+  optout_annotation: "If you are using hosting and do not have your own domain, please wait as we are considering another method."
+  optout_fqdn_caption: "FQDN you want to opt out :"
+

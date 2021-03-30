@@ -18,3 +18,12 @@ ja:
   all: "すべて"
   select_software_annotation: "「すべて」以外はキーワードを省略できます"
   server_type: "サーバー種別"
+  optout_page: "オプトアウト画面"
+  optout_information: "自分のサーバーやインスタンスをこの検索サービスから除外したい場合は、以下のようにします。"
+  optout_description_1: "DNSのTXTフィールドに\"nofediversesearch\"を設定します。"
+  optout_description_2: "サーバーのFQDNを入力し、「Check DNS」ボタンをクリックします。システムがTXTフィールドが設定されていることを確認すると、Optoutボタンが有効になります。"
+  optout_description_3: "「オプトアウト」ボタンを押すと、再度DNSのチェックが行われ、問題がなければ、お客様のサーバーを検索対象外とする設定になります。この場合、検索結果には表示されませんが、お客様のサーバー情報を収集しないためにFQDNは保持されますのでご注意ください。"
+  optout_description_4: "「完了」ボタンをクリックすると、トップページに戻ります。"
+  optout_annotation: "ホスティングをご利用で、独自ドメインをお持ちでない方は、別の方法を検討していますのでお待ちください。"
+  optout_fqdn_caption: "オプトアウトを希望するFQDN :"
+
