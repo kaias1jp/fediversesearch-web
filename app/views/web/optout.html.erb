@@ -1,6 +1,10 @@
 <script>
   function startdnscheck() {
+<<<<<<< Updated upstream
     const url = '<%= ENV["FS_SERVER_URL"]%>/api/v1/dnscheck/?uri=';
+=======
+    const url = 'https://www.fediversesearch.com/api/v1/dnscheck/?uri=';
+>>>>>>> Stashed changes
     let uri = document.getElementById('uri').value;
 
 fetch(url+encodeURIComponent(uri)).then(function(response) {
@@ -42,8 +46,8 @@ function startfinish() {
 If you want to exclude your server or instance from this search service, do the following:<br/>
 <ol>
   <li>Set "nofediversesearch" in the TXT field of DNS.</li>
-  <li>Enter the server uri and click the "Check DNS" button. Once the system confirms that the TXT field is set, the Opt out button will be enabled.</li>
-  <li>When you press the "Opt out" button, the DNS will be checked again and if there are no problems, the system will be set to exclude your server from search. Note that if you do this, it will not appear in the search results, but the uri will be retained to avoid collecting your server information.</li>
+  <li>Enter the server FQDN and click the "Check DNS" button. Once the system confirms that the TXT field is set, the Opt out button will be enabled.</li>
+  <li>When you press the "Optout" button, the DNS will be checked again and if there are no problems, the system will be set to exclude your server from search. Note that if you do this, it will not appear in the search results, but the FQDN will be retained to avoid collecting your server information.</li>
   <li>Click the "Finish" button to return to the top page.</li>
 </ol>
 * If you are using hosting and do not have your own domain, please wait as we are considering another method.<br/>
@@ -51,10 +55,10 @@ If you want to exclude your server or instance from this search service, do the 
 <div>
   <table align="center">
   <form name="form1" id="form1" onsubmit="return false;">
-    <tr><td>URI you want to opt out : <input type="text" id="uri"></input></td></tr>
+    <tr><td>FQDN you want to opt out : <input type="text" id="uri"></input></td></tr>
     <tr><td align='center'>↓</td></tr>
     <tr><td align='center'><%= button_tag :type => 'button', :id=> 'dnscheck', :onclick => 'startdnscheck()' do %>
-        <%= 'DNS Check' %>
+        <%= 'Check DNS' %>
       <% end %>
       </td></tr>
           <tr><td align='center'>↓</td></tr>
