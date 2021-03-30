@@ -41,7 +41,7 @@ function booleantostr(bool) {
       }
         console.log(data);
         $.ajax({        
-                url:"https://www.fediversesearch.com/search/", // 通信先のURL
+                url:"<%= ENV['FS_SERVER_URL']%>/api/v1/search/", // 通信先のURL
                 type:"GET",             // 使用するHTTPメソッド
                 data: data,
                 contentType: 'application/json',

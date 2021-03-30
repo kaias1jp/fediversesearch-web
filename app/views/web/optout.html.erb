@@ -1,6 +1,6 @@
 <script>
   function startdnscheck() {
-    const url = 'https://www.fediversesearch.com/dnscheck/?uri=';
+    const url = '<%= ENV["FS_SERVER_URL"]%>/api/v1/dnscheck/?uri=';
     let uri = document.getElementById('uri').value;
 
 fetch(url+encodeURIComponent(uri)).then(function(response) {
@@ -21,7 +21,7 @@ fetch(url+encodeURIComponent(uri)).then(function(response) {
 });
   }
 function startoptout() {
-    const url = 'https://www.fediversesearch.com/optout/?uri=';
+    const url = '<%= ENV["FS_SERVER_URL"]%>/api/v1/optout/?uri=';
     let uri = document.getElementById('uri').value;
 
 fetch(url+encodeURIComponent(uri)).then(function(response) {
