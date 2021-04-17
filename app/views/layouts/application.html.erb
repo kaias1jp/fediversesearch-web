@@ -83,7 +83,7 @@ function booleantostr(bool) {
 </script>
         <script>
                 $(function() {
-                        const url = '<%= ENV["FS_SERVER_URL"]%>/api/v1/count/';
+                        const url = '<%= ENV["FS_SERVER_URL"]%>/api/v1/count';
 fetch(url).then(function(response) {
   return response.text();
 }).then(function(text) {
