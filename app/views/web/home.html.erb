@@ -81,8 +81,6 @@ function booleantostr(bool) {
                                     $("#resXmlHttpRequestObj").append(html);
     }
                   $("#resXmlHttpRequestObj").append("</table>");
-                  $("#resXmlHttpRequestObj").append('<script>jQuery("#tabledata").searcher({inputSelecter: "#tablesearchinput"})<\/script>');
-        //              document.getElementById("resXmlHttpRequestObj").innerHTML=data2;
 
                                 // 5.JSONをJavaScriptオブジェクトにし、
                                 // キーを指定して値(httpbin.org)を表示
@@ -128,13 +126,6 @@ function booleantostr(bool) {
        </tbody>
     </table>
   </div>
-<!--<p>jqXHR.statusを表示：<span id="span1"></span></p>
-<p>textStatusを表示：<span id="span2"></span></p>
-<p>errorThrownを表示：<span id="span3"></span></p>
-<p>表示1：<span id="span4"></span></p>
-<p>表示2：<span id="span5"></span></p>
-<p>表示3：<span id="span6"></span></p>
--->
 <h2>fediverse search (mastodon, pleroma, pixelfed, misskey, etc...)</h2>
 *
 <%= t :search_for_server %><br/><br/>

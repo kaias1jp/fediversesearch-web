@@ -80,7 +80,6 @@ function search(){
                         $("#resXmlHttpRequestObj").empty();
                         console.log(Object.keys(data2).length);
                   $("#resXmlHttpRequestObj").append("<br/><%= t :result_counts %>:"+Object.keys(data2).length+"<br/>");
-//                $("#resXmlHttpRequestObj").append("<input id='tablesearchinput' />");
 json_data = data2;
                         $("#resXmlHttpRequestObj").append('<table id="tabledata">'); 
                   $("#resXmlHttpRequestObj").append('<thead><tr><th><%= t :registrations %></th><th><%= t :title %></th></tr></thead>');
@@ -132,6 +131,9 @@ json_data = data2;
       </tr>
       <tr>
         <td>created by <a href="https://popon.pptdn.jp/@popn_ja" target="_blank">popn_ja</a></td>
+      </tr>
+      <tr>
+      <td><a href="<%= ENV['GITHUB_URL']%>" target="_blank" rel="noopener noreferrer">github</a></td>
       </tr>
        </tbody>
     </table>
