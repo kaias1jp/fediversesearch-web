@@ -116,6 +116,23 @@ th {
 
   <body bgcolor="#fff3dc">
     <%= yield %>
+<div class="footer">
+   <div class="container">
+<hr/>
+    <table style="border:none;"  width="100%" align="right">
+      <tbody style="border:none;" align="right">
+        <tr>
+        <td></td>
+        <td>created by <a href="https://popon.pptdn.jp/@popn_ja" target="_blank" rel="noopener noreferrer">popn_ja</a></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><a href="<%= ENV['GITHUB_URL']%>" target="_blank" rel="noopener noreferrer">github</a></td>
+       </tr>
+</tbody>
+</table>
+</div>
+</div>
   </body>
   <script>
         var arg  = new Object;
