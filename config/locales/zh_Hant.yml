@@ -58,4 +58,8 @@ zh_Hant:
   optout_description_4: "單擊“完成”按鈕以返回首頁。"
   optout_annotation: "如果您使用的是託管服務，但沒有自己的域，請稍候，我們正在考慮另一種方法。"
   optout_fqdn_caption: "您要選擇退出的FQDN："
+  total_users: "用戶總數"
+  active_users: "活躍用戶"
+  sort_order: "排序"
+  desc: "降序排列"
 

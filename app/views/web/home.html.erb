@@ -39,8 +39,10 @@ function booleantostr(bool) {
       if ($("#software").val() != "") {
         data.software = $("#software").val();
       }
-        console.log(data);
-        $.ajax({        
+      data.minimumnumberofusers = $("#minimumnumberofusers").val();
+      data.sort = $("#sort").val();
+      data.orderby= $("#orderby").val();
+      $.ajax({        
                 url:"<%= ENV['FS_SERVER_URL']%>/api/v1/search/", // 通信先のURL
                 type:"GET",             // 使用するHTTPメソッド
                 data: data,
@@ -69,11 +71,16 @@ function booleantostr(bool) {
                //$("#resXmlHttpRequestObj").append("<input id='tablesearchinput'  class='search'/>");
 
                         $("#resXmlHttpRequestObj").append('<table id="tabledata">'); 
-                  $("#resXmlHttpRequestObj").append('<thead><tr><th><%= t :url %></th><th><%= t :title %></th><th><%= t :short_description %></th><th><%= t :description %></th><th><%= t :registrations %></th></tr></thead>');
+                  $("#resXmlHttpRequestObj").append('<thead><tr><th><%= t :url %></th><th><%= t :title %></th><th><%= t :active_users %></th><th><%= t :short_description %></th><th><%= t :description %></th><th><%= t :registrations %></th></tr></thead>');
                         for(var i in data2){
                                     html = "<tr>";
                                     html += "<td bgcolor='#99CC00'><a href='https://" + htmlEntities(data2[i].uri)+ "' target='_blank'>"+htmlEntities(data2[i].uri)+"</a></td>";
-                                    html += "<td bgcolor='#ffffff'>"+htmlEntities(data2[i].title)+"</td>";
+                          html += "<td bgcolor='#ffffff'>"+htmlEntities(data2[i].title)+"</td>";
+                          active_user = data2[i].active_user;
+                          if(active_user == 0) {
+                            active_user = "";
+                          }
+                          html += "<td bgcolor='#ffffff' align='right'>"+active_user+"</td>";
                                     html += "<td title=\""+htmlEntities(data2[i].short_description).replace(/"/g, '&quot;')+"\" bgcolor='#dddddd'>"+htmlEntities(data2[i].short_description).substr(0, 32)+"</td>";
                                     html += "<td title=\""+htmlEntities(data2[i].description).replace(/"/g, '&quot;')+"\" bgcolor='ffffff'>"+htmlEntities(data2[i].description).substr(0, 64)+"</td>";
                                     html += "<td bgcolor='#dddddd'>"+booleantostr(data2[i].registrations)+"</td>";
@@ -137,6 +144,24 @@ function booleantostr(bool) {
     <option value="hubzilla">Hubzilla</option>
     <option value="plume">Plume</option>
     <option value="other">Others</option>
-  </select> * <%= t :select_software_annotation %>
+  </select> * <%= t :select_software_annotation %><br/>
+  <%= t :active_users %>:<select name="minimumnumberofusers" id="minimumnumberofusers">
+    <option value="1">-- <%= t :all %> --</option>
+    <option value="10"> &gt; 10 </option>
+    <option value="100"> &gt; 100 </option>
+    <option value="1000"> &gt; 1000 </option>
+    <option value="10000"> &gt; 10000 </option>
+  </select><br/>
+  <%= t :sort_order %>:<select name="sort" id="sort">
+    <option value="">---</option>
+    <option value="uri"><%= t :url %></option>
+    <option value="title"><%= t :title %></option>
+    <option value="active_user"><%= t :active_users %></option>
+  </select>   
+  <select name="orderby" id="orderby">
+    <option value="">---</option>
+    <option value="desc"><%= t :desc %></option>
+  </select>
+
 </form>
   <div id="resXmlHttpRequestObj"><table id="tabledata"></table></div>

@@ -4,15 +4,21 @@
     function setdata(index) {
       $("#detaildata").empty();
       $("#detaildata").append('<table width="100%">');
-      $("#detaildata").append('<tr><th>title</th></tr>');
+      $("#detaildata").append('<tr><th><%= t :title %></th></tr>');
       $("#detaildata").append("<tr><td>"+htmlEntities(json_data[index].title)+"</td></tr>");
-      $("#detaildata").append('<tr><th>URL</th></tr>');
+      $("#detaildata").append('<tr><th><%= t :url %></th></tr>');
       $("#detaildata").append("<tr><td><a href='https://" + htmlEntities(json_data[index].uri)+ "' target='_blank'>"+htmlEntities(json_data[index].uri)+"</a></td></tr>");
-      $("#detaildata").append("<tr><th>short_description</th></tr>");
+      $("#detaildata").append("<tr><th><%= t :short_description %></th></tr>");
       $("#detaildata").append("<tr><td>"+htmlEntities(json_data[index].short_description)+"</td></tr>");
-      $("#detaildata").append("<tr><th>description</th></tr>");
+      $("#detaildata").append("<tr><th><%= t :active_users %></th></tr>");
+      active_user = json_data[index].active_user;
+      if (active_user == 0) {
+        active_user = "";
+      }
+      $("#detaildata").append("<tr><td>"+htmlEntities(active_user)+"</td></tr>");
+      $("#detaildata").append("<tr><th><%= t :description %></th></tr>");
       $("#detaildata").append("<tr><td>"+htmlEntities(json_data[index].description)+"</td></tr>");
-      $("#detaildata").append("<tr><th>registrations</th></tr>");
+      $("#detaildata").append("<tr><th><%= t :registrations %></th></tr>");
       $("#detaildata").append("<tr><td>"+htmlEntities(booleantostr(json_data[index].registrations))+"</td></tr>");
       $("#detaildata").append('</table>');
     }
@@ -52,8 +58,11 @@ function search(){
       }
         if ($("#software").val() != "") {
         data.software = $("#software").val();
-      }
-  console.log(data);
+        }
+  data.minimumnumberofusers = $("#minimumnumberofusers").val();
+  data.sort = $("#sort").val();
+  data.orderby = $("#orderby").val();
+
         $.ajax({        
                 url:"<%= ENV['FS_SERVER_URL']%>/api/v1/search/", // 通信先のURL
                 type:"GET",             // 使用するHTTPメソッド
@@ -81,13 +90,19 @@ function search(){
                         console.log(Object.keys(data2).length);
                   $("#resXmlHttpRequestObj").append("<br/><%= t :result_counts %>:"+Object.keys(data2).length+"<br/>");
 json_data = data2;
-                        $("#resXmlHttpRequestObj").append('<table id="tabledata">'); 
-                  $("#resXmlHttpRequestObj").append('<thead><tr><th><%= t :registrations %></th><th><%= t :title %></th></tr></thead>');
+                        $("#resXmlHttpRequestObj").append('<table id="tabledata" width="100%">'); 
+                  $("#resXmlHttpRequestObj").append('<thead><tr><th><%= t :title %></th><th><%= t :active_users %></th><th><%= t :registrations %></th></tr></thead>');
                         for(var i in data2){
                                     html = "<tr>";
-                          html += "<td bgcolor='#dddddd'>"+booleantostr(data2[i].registrations)+"</td>";
+                          // html += "<td bgcolor='#dddddd'>"+booleantostr(data2[i].registrations)+"</td>";
                           //                                    html += "<td bgcolor='#99CC00'><a href='https://" + htmlEntities(data2[i].uri)+ "' target='_blank'>"+htmlEntities(data2[i].uri)+"</a></td>";
-                          html += "<td bgcolor='#ffffff' style='word-wrap:break-word;'>"+htmlEntities(data2[i].title)+"<a href='#ex1' rel='modal:open' onclick='setdata("+i+")'>"+"("+htmlEntities(data2[i].uri)+")"+"</a></td>";
+                          html += "<td bgcolor='#ffffff' style='word-wrap:break-word;'>"+htmlEntities(data2[i].title)+" (<a href='#ex1' rel='modal:open' onclick='setdata("+i+")'>"+htmlEntities(data2[i].uri)+"</a>)</td>";
+                          active_user = data2[i].active_user;
+                          if (active_user == 0) {
+                            active_user = "";
+                          }
+                          html += "<td bgcolor='#ffffff' align='right'>"+active_user+"</td>";
+                          html += "<td bgcolor='#dddddd'>"+booleantostr(data2[i].registrations)+"</td>";
 //                                    html += "<td title='"+htmlEntities(data2[i].short_description)+"' bgcolor='#dddddd'>"+htmlEntities(data2[i].short_description).substr(0, 32)+"</td>";
 //                                    html += "<td title='"+htmlEntities(data2[i].description)+"' bgcolor='ffffff'>"+htmlEntities(data2[i].description).substr(0, 64)+"</td>";
 //                                    html += "<td bgcolor='#dddddd'>"+booleantostr(data2[i].registrations)+"</td>";
@@ -158,7 +173,25 @@ json_data = data2;
     <option value="hubzilla">Hubzilla</option>
     <option value="plume">Plume</option>
     <option value="other">Others</option>
-  </select> * <%= t :select_software_annotation %>
+  </select> * <%= t :select_software_annotation %><br/>
+<%= t :active_users %>:<select name="minimumnumberofusers" id="minimumnumberofusers">
+  <option value="1">-- <%= t :all %> --</option>
+  <option value="10"> &gt; 10 </option>
+  <option value="100"> &gt; 100 </option>
+  <option value="1000"> &gt; 1000 </option>
+  <option value="10000"> &gt; 10000 </option>
+</select><br/>
+<%= t :sort_order %>:<select name="sort" id="sort">
+  <option value="">---</option>
+  <option value="uri"><%= t :url %></option>
+  <option value="title"><%= t :title %></option>
+  <option value="active_user"><%= t :active_users %></option>
+</select>   
+<select name="orderby" id="orderby">
+  <option value="">---</option>
+  <option value="desc"><%= t :desc %></option>
+</select>
+
 </form>
 <div id="ex1" class="modal">
   <div id="detaildata"></div>

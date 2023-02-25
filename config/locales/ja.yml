@@ -6,7 +6,7 @@ ja:
   get_data: "データ取得中..."
   locale: "日本語"
   url: "url"
-  title: "題名"
+  title: "サーバ名"
   short_description: "簡単な説明"
   description: "説明"
   registrations: "ユーザ登録"
@@ -26,4 +26,8 @@ ja:
   optout_description_4: "「完了」ボタンをクリックすると、トップページに戻ります。"
   optout_annotation: "ホスティングをご利用で、独自ドメインをお持ちでない方は、別の方法を検討していますのでお待ちください。"
   optout_fqdn_caption: "オプトアウトを希望するFQDN :"
+  total_users: "総ユーザ数"
+  active_users: "アクティブ ユーザー数"
+  sort_order: "ソート順"
+  desc: "降順"
 

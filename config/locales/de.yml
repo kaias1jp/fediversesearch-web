@@ -57,4 +57,8 @@ de:
   optout_description_4: "Klicken Sie auf die Schaltfläche \"Fertigstellen\", um zur obersten Seite zurückzukehren."
   optout_annotation: "Wenn Sie Hosting nutzen und keine eigene Domain haben, warten Sie bitte, da wir eine andere Methode in Betracht ziehen."
   optout_fqdn_caption: "FQDN, den Sie abwählen möchten:"
+  total_users: "Benutzer insgesamt"
+  active_users: "aktive Benutzer"
+  sort_order: "Sortierreihenfolge"
+  desc: "absteigende Reihenfolge"
 

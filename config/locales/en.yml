@@ -58,4 +58,10 @@ en:
   optout_description_4: "Click the \"Finish\" button to return to the top page."
   optout_annotation: "If you are using hosting and do not have your own domain, please wait as we are considering another method."
   optout_fqdn_caption: "FQDN you want to opt out :"
+  total_users: "Total Users"
+  active_users: "Active Users"
+  sort_order: "Sort order"
+  desc: "descending order"
+
+
 
